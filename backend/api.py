@@ -1,5 +1,6 @@
 import time
 from flask import Flask, request, jsonify
+from WalMart_scraper import get_WM_items
 
 app = Flask(__name__)
 
@@ -8,17 +9,16 @@ app = Flask(__name__)
 def get_time():
     return {'time': time.time()}
 
-#testing the connection
-@app.route('/api/stores', methods=['POST'])
-def search_stores():
+@app.route('/api/search', methods=['POST'])
+def search_groceries():
     data = request.get_json()
-    selected_item = data.get('item')
+    item =  data.get('query')
 
-    if selected_item:
-        print("Selected item:", selected_item)
-        return "Selected item printed on the server", 200
-    else:
-        return "Invalid request", 400
+    # Just a test
+    # print("The item: " + item)
+    
+    search_results = get_WM_items(item)
+    return jsonify(search_results), 200
 
 if __name__ == '__main__':
     app.run(debug=True)

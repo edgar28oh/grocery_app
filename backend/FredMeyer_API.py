@@ -40,20 +40,20 @@ if response.status_code == 200:
 
     # Query parameters for product search
     params = {
-        "filter.term": f"{item}",  # Example search term
-        "filter.limit": 10,  # Limiting to 10 results
+        "filter.term": f"{item}",  
+        "filter.limit": 10,  
         "filter.locationId": 70100603 # Shelton, WA location ID
     }
 
-    # Make API request to search for products
+    # Make API request
     search_response = requests.get(product_search_url, headers=headers, params=params)
 
-    # Parse search response
+    # Parse response
     items = {}
     if search_response.status_code == 200:
         product_data = search_response.json()["data"]
 
-        # Process product data
+        # Process  data
         for product in product_data:
 
             if "productId" in product:
@@ -66,10 +66,10 @@ if response.status_code == 200:
                     "Accept": "application/json"
                 }
 
-                # Make the API request
+                # Make API request
                 product_response = requests.get(product_details_url, headers=headers, params=params)
 
-                # Check if the request was successful
+                # if the request was successful
                 if product_response.status_code == 200:
                         product_data = product_response.json()
 
@@ -83,6 +83,7 @@ if response.status_code == 200:
                                 item_name = item_info + " " + item.get("size")
                                 print(item_name)
                                 
+                                # Get price info
                                 if price_info:
                                     regular_price = price_info.get("regular")
                                     promo_price = price_info.get("promo")
@@ -93,9 +94,11 @@ if response.status_code == 200:
                             print("No items found for the specified product ID.")
                 else:
                     print("Error:", product_response.status_code)
+            # Get image info
             images = product['images']
             for image in images:
                 sizes = image['sizes']
+                # Get thumbnail image
                 for size in sizes:
                     if size['size'] == 'thumbnail':
                         thumbnail_url = size['url']
@@ -107,3 +110,6 @@ if response.status_code == 200:
         print("Error:", search_response.status_code)
 else:
     print("Error:", response.status_code)
+
+
+## Will get rid of print tests once the connection is made from backend to frontend
