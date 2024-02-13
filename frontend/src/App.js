@@ -6,12 +6,34 @@ import StoreIcons from './components/StoreIcons';
 import './App.css';
 
 const App = () => {
+
+  // state to hold selected stores
+  const [selectedStores, setSelectedStores] = useState([]);
+
   // search results state
   const [searchResults, setSearchResults] = useState([]);
-  const handleSearch = (data) => {
-    setSearchResults(data);
-  };
 
+  // handle search result
+  const handleSearch = (data) => {setSearchResults(data);};
+
+  // State to hold selected items
+  const [selectedItems, setSelectedItems] = useState([]);
+
+  // handle adding an item to the selected items list
+  const handleAddItem = (item) => {
+    // DEBUG console.log('Item added:', item);
+    setSelectedItems([...selectedItems, item]);
+  };
+  // Function to handle store selection
+  const handleStoreSelect = (store) => {
+    setSelectedStores((prevSelectedStores) => {
+      if (prevSelectedStores.includes(store)) {
+        return prevSelectedStores.filter((s) => s !== store);
+      } else {
+        return [...prevSelectedStores, store];
+      }
+    });
+  };
   // time state JUST an API test
   const [currentTime, setCurrentTime] = useState(404);
   useEffect(() => {
@@ -20,17 +42,6 @@ const App = () => {
     });
   }, []);
   
-
-  // State to hold selected items
-  const [selectedItems, setSelectedItems] = useState([]);
-
-  // handle adding an item to the selected items list
-
-  const handleAddItem = (item) => {
-    // DEBUG console.log('Item added:', item);
-    setSelectedItems([...selectedItems, item]);
-  };
-
 return (
 
     <div className="h-screen flex flex-col">
@@ -43,13 +54,13 @@ return (
           </h2>
             {/*  option to select stores */}
             <div className="flex justify-center items-center space-x-4 ">
-              <StoreIcons src={process.env.PUBLIC_URL + "WM_logo.png"} alt ="Wal-Mart Store Logo" store="Wal-Mat"/>
-              <StoreIcons src={process.env.PUBLIC_URL + "FM_logo.png"} alt ="Fred Meyer Store Logo" store="Fred-Meyer"/>
+              <StoreIcons src={process.env.PUBLIC_URL + "WM_logo.png"} alt ="Wal-Mart Store Logo" store="Wal-Mart" selectedStores={selectedStores} onStoreSelect={handleStoreSelect}/>
+              <StoreIcons src={process.env.PUBLIC_URL + "FM_logo.png"} alt ="Fred Meyer Store Logo" store="Fred-Meyer" selectedStores={selectedStores} onStoreSelect={handleStoreSelect}/>
             </div>
         </div>
         <div className="w-1/2 border-solid border-2 border-purple-950"> {/* right half */}
           <h2>Search items to add to your list!</h2>
-          <GrocerySearch onSearch={handleSearch}/>
+          <GrocerySearch onSearch={handleSearch} selectedStores ={selectedStores}/>
         </div>
       </div>
       <div className="flex-1 flex"> {/* bottom container */}

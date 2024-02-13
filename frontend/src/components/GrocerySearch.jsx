@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 // Handles the search bar for the page
 
-const GrocerySearch = ({ onSearch }) => {
+const GrocerySearch = ({ onSearch, selectedStores }) => {
   const [query, setQuery] = useState('');
 
   const handleSearch = async () => {
@@ -12,7 +12,7 @@ const GrocerySearch = ({ onSearch }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ query }),
+        body: JSON.stringify({ query, selectedStores }),
       });
 
       if (response.ok) {

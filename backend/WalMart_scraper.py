@@ -1,6 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
 
+# Need to fix the data processing. 
+# When an item is on sale it throws off the names and prices
+
 def get_WM_items(item):
     item.replace(" ", "%20")
     target_url=f"https://www.walmart.com/search?q={item}"
@@ -20,7 +23,6 @@ def get_WM_items(item):
 
     name_price = soup.find_all("span", {"class": "w_iUH7"})
   
-    ##### THIS LOGIC IS BROKEN needs fixed
     # get names and prices into separate lists
     names = [element.text.strip() for element in name_price[::2]] 
     prices = [element.text.strip().replace("current price ", "") for element in name_price[1::2]]
@@ -39,7 +41,6 @@ def get_WM_items(item):
             "image_src": image.get("src")
         }
         products.append(product)
-    #print(products)
 
     return products
 
