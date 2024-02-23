@@ -13,6 +13,7 @@ const ListItem = ({ items, onItemClick }) => {
             <p className="text-lg text-center font-semibold mb-2">{item.name}</p>
             <p className="text-black-300">Store: {item.store}</p>
             <p className="text-black-300">Price: {item.price}</p>
+            <p className="text-black-300">Sale Price: {item.sale_price ? `$${item.sale_price}` : "Not on Sale"}</p>
             <div className= "mx-0 flex flex-col items-center">
                 <button onClick={() => onItemClick(item)} className="mt-2 bg-blue-500 text-white py-2 px-4 rounded">Add to List</button>
             </div>

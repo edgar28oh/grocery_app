@@ -10,7 +10,9 @@ const GroceryList = ({selectedItems}) => {
       <h2>Selected Items</h2>
       <ul>
         {selectedItems.map((item, index) => (
-          <li key={index}>({item.store}) {item.name} - ${item.price}</li>
+          <li key={index}>({item.store}) {item.name} - 
+          {item.sale_price ? `$${item.sale_price}` : `$${item.price}`}
+          </li>
         ))}
       </ul>
     </div>

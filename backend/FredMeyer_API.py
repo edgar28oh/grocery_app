@@ -83,13 +83,11 @@ def getFredMeyer(item):
                                 for item in items:
                                     price_info = item.get("price")
                                     item_name = item_info + " " + item.get("size")
-                                    #print(item_name)
                                     
                                     # Get price info
                                     if price_info:
                                         regular_price = price_info.get("regular")
                                         promo_price = price_info.get("promo")
-                                        #print(f"Regular Price: ${regular_price}, Promo Price: ${promo_price}")
                                     else:
                                         print("Price information not available.")
                             else:
@@ -104,11 +102,10 @@ def getFredMeyer(item):
                     for size in sizes:
                         if size['size'] == 'medium':
                             img = size['url']
-                            #print("Thumbnail URL:", thumbnail_url)
+
                             break 
                     break
-                # add "promo_price": promo_price, back in
-                products.append({"name": item_name, "price": regular_price, "image_src": img, "store": "Fred-Meyer"})
+                products.append({"name": item_name, "price": regular_price, "sale_price": promo_price, "image_src": img, "store": "Fred-Meyer"})
         else:
             print("Error:", search_response.status_code)
     else:

@@ -22,7 +22,7 @@ const StoreIcons = ({ src, alt, store, selectedStores, onStoreSelect }) => {
     return (
       <div className="flex">
         <button
-          className={`w-24 h-24 bg-gray-200 flex justify-center items-center focus:outline-none hover:bg-gray-300 ${
+          className={`w-24 h-24 bg-gray-200 flex justify-center items-center focus:outline-none ${
             isSelected ? 'bg-lime-500' : 'bg-gray-500'
             //selectedStore.includes(store) ?
           }`}

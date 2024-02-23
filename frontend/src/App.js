@@ -48,12 +48,11 @@ return (
       <h1 className='text-center text-4xl'>Grocery App </h1>
       <p>the time is {currentTime}</p>
       <div className="h-1/6 flex"> {/* top container */}
-        <div className="w-1/2 border-solid border-2 border-purple-950	 "> {/* left half */}
-          <h2>
-            Stores
-          </h2>
+        <div className="w-1/2 border-solid border-2 border-purple-950 flex flex-col justify-center items-center"> {/* left half */}
+
             {/*  option to select stores */}
             <div className="flex justify-center items-center space-x-4 ">
+              <h2>Stores</h2>
               <StoreIcons src={process.env.PUBLIC_URL + "WM_logo.png"} alt ="Wal-Mart Store Logo" store="Wal-Mart" selectedStores={selectedStores} onStoreSelect={handleStoreSelect}/>
               <StoreIcons src={process.env.PUBLIC_URL + "FM_logo.png"} alt ="Fred Meyer Store Logo" store="Fred-Meyer" selectedStores={selectedStores} onStoreSelect={handleStoreSelect}/>
             </div>
